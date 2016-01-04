@@ -95,6 +95,18 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\WebFiles\Images\kodakit.png" />
     <AndroidAsset Include="Assets\WebFiles\css\stylesheet.css" />
+    <AndroidAsset Include="Assets\WebFiles\vlb\vlb_engine\jquery.min.js" />
+    <AndroidAsset Include="Assets\WebFiles\vlb\vlb_engine\visuallightbox.js" />
+    <AndroidAsset Include="Assets\WebFiles\vlb\vlb_engine\vlbdata1.js" />
+    <AndroidAsset Include="Assets\WebFiles\vlb\vlb_files1\arrows.png" />
+    <AndroidAsset Include="Assets\WebFiles\vlb\vlb_files1\borderCorners.png" />
+    <AndroidAsset Include="Assets\WebFiles\vlb\vlb_files1\borderHoriz.png" />
+    <AndroidAsset Include="Assets\WebFiles\vlb\vlb_files1\borderVert.png" />
+    <AndroidAsset Include="Assets\WebFiles\vlb\vlb_files1\close.png" />
+    <AndroidAsset Include="Assets\WebFiles\vlb\vlb_files1\close_hover.png" />
+    <AndroidAsset Include="Assets\WebFiles\vlb\vlb_files1\loading.gif" />
+    <AndroidAsset Include="Assets\WebFiles\vlb\vlb_files1\visuallightbox.css" />
+    <AndroidAsset Include="Assets\WebFiles\vlb\vlb_files1\vlightbox1.css" />
     <Content Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
