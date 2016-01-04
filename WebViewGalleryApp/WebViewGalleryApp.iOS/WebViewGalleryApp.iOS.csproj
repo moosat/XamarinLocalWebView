@@ -92,6 +92,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Controls\BaseUrl_iOS.cs" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -181,6 +182,39 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\WebFiles\vlb\vlb_files1\vlightbox1.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\WebFiles\PhotoSwipe\kodak\style.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\WebFiles\PhotoSwipe\kodak\swipe.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\WebFiles\PhotoSwipe\dist\default-skin\default-skin.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\WebFiles\PhotoSwipe\dist\default-skin\default-skin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\WebFiles\PhotoSwipe\dist\default-skin\default-skin.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\WebFiles\PhotoSwipe\dist\default-skin\preloader.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\WebFiles\PhotoSwipe\dist\photoswipe-ui-default.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\WebFiles\PhotoSwipe\dist\photoswipe-ui-default.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\WebFiles\PhotoSwipe\dist\photoswipe.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\WebFiles\PhotoSwipe\dist\photoswipe.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\WebFiles\PhotoSwipe\dist\photoswipe.min.js" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.1.3.3.6323\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.1.3.3.6323\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

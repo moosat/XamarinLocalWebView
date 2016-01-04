@@ -107,6 +107,17 @@
     <AndroidAsset Include="Assets\WebFiles\vlb\vlb_files1\loading.gif" />
     <AndroidAsset Include="Assets\WebFiles\vlb\vlb_files1\visuallightbox.css" />
     <AndroidAsset Include="Assets\WebFiles\vlb\vlb_files1\vlightbox1.css" />
+    <AndroidAsset Include="Assets\WebFiles\PhotoSwipe\kodak\style.css" />
+    <AndroidAsset Include="Assets\WebFiles\PhotoSwipe\kodak\swipe.js" />
+    <AndroidAsset Include="Assets\WebFiles\PhotoSwipe\dist\photoswipe.css" />
+    <AndroidAsset Include="Assets\WebFiles\PhotoSwipe\dist\photoswipe.js" />
+    <AndroidAsset Include="Assets\WebFiles\PhotoSwipe\dist\photoswipe.min.js" />
+    <AndroidAsset Include="Assets\WebFiles\PhotoSwipe\dist\photoswipe-ui-default.js" />
+    <AndroidAsset Include="Assets\WebFiles\PhotoSwipe\dist\photoswipe-ui-default.min.js" />
+    <AndroidAsset Include="Assets\WebFiles\PhotoSwipe\dist\default-skin\default-skin.css" />
+    <AndroidAsset Include="Assets\WebFiles\PhotoSwipe\dist\default-skin\default-skin.png" />
+    <AndroidAsset Include="Assets\WebFiles\PhotoSwipe\dist\default-skin\default-skin.svg" />
+    <AndroidAsset Include="Assets\WebFiles\PhotoSwipe\dist\default-skin\preloader.gif" />
     <Content Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
