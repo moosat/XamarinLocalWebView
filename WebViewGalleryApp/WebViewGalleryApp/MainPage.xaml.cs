@@ -76,7 +76,7 @@ namespace WebViewGalleryApp
                                     <p><a href=""local.html"">next page</a></p>
                                 </body>
                                 </html>";
-            //htmlSource.Html = GetHtmlSource();
+            htmlSource.Html = GetVlboxHtmlSource();
             //htmlSource.Html = GetPhotoSwipeHtml();
             Browser.Source = htmlSource;
         }
@@ -104,11 +104,11 @@ namespace WebViewGalleryApp
 
         //<a class="vlightbox1" href="http://res.cloudinary.com/kodakbluesky/image/upload/v1451847955/da960d4e-0284-4e6c-89c3-69ba49a9db1e/da960d4e-0284-4e6c-89c3-69ba49a9db1e/1421656088-1_-_Copy.jpg" title=""><img src = "http://res.cloudinary.com/kodakbluesky/image/upload/t_Scale120/v1451847955/da960d4e-0284-4e6c-89c3-69ba49a9db1e/da960d4e-0284-4e6c-89c3-69ba49a9db1e/1421656088-1_-_Copy.jpg" /></ a >
 
-        private string GetHtmlSource()
+        private string GetVlboxHtmlSource()
         {
             const string replaceClause = "####IMAGES_LINES_GOWSHERE###";
             string template = GetHtmlTemplate("HtmlTemplate.html");
-            string lines = BuildImagesLines(_coludinaryIds);
+            string lines = BuildVlboxImagesLines(_coludinaryIds);
             string sourceHtml = template.Replace(replaceClause, lines);
             return sourceHtml;
         }
@@ -125,22 +125,46 @@ namespace WebViewGalleryApp
             return text;
         }
 
-        
-
-        private string BuildPhotoSwipeImagesLines(List<string> cloudinaryIds)
+        private string GetThumnbailTransformation()
         {
-            const string cloudinaryBaseUrl = "https://res.cloudinary.com/kodakbluesky/image/upload/";
-            const string cloudinaryScaleThumbnail = "c_fit,h_80,w_120/";
-            const string cloudinaryScaleImage = "c_fit,w_1200,h_800/";
+            var device = Resolver.Resolve<IDevice>(); 
+            int thumnW = (device.Display.Width/5);
+            int thumnH = (int) (thumnW*0.5622);
+            //string trans = $"c_thumb,h_{thumnH},w_{thumnW}/";
+            string trans = $"c_thumb,w_{thumnW}/";
+            return trans;
+        }
+
+        private string GetScaledImageUrl(string cloudinaryId)
+        {
+            string cloudinaryScaleImage = GetFullSizeTransformation();
+            string scaledImageUrl = $"{CloudinaryBaseUrl}{cloudinaryScaleImage}{cloudinaryId}";
+            return scaledImageUrl;
+        }
+        private string GetScaledThunmbailImageUrl(string cloudinaryId)
+        {
+            string cloudinaryScaleImage = GetThumnbailTransformation();
+            string scaledImageUrl = $"{CloudinaryBaseUrl}{cloudinaryScaleImage}{cloudinaryId}";
+            return scaledImageUrl;
+        }
+
+        private string GetFullSizeTransformation()
+        {
+            //1366x768 fill
+            //return "t_Landscape/";
+            return "c_scale,w_500/";
+        }
+        const string CloudinaryBaseUrl = "https://res.cloudinary.com/kodakbluesky/image/upload/";
+        private string BuildPhotoSwipeImagesLines(List<string> cloudinaryIds)
+        {            
             StringBuilder sb = new StringBuilder();
             foreach (var cloudinaryId in cloudinaryIds)
             {
-                //string fullImageUrl = $"{cloudinaryBaseUrl}{cloudinaryId}";
-                string scaledImageUrl = $"{cloudinaryBaseUrl}{cloudinaryScaleImage}{cloudinaryId}";
-                string scaledThumbnailUrl = $"{cloudinaryBaseUrl}{cloudinaryScaleThumbnail}{cloudinaryId}";
+                string scaledImageUrl = GetScaledImageUrl(cloudinaryId);
+                string scaledThumbnailUrl = GetScaledThunmbailImageUrl(cloudinaryId);
 
                 string lineTemplate = $@"<figure itemprop='associatedMedia' itemscope itemtype='http://schema.org/ImageObject'>
-                                         <a href='{scaledImageUrl}' itemprop='contentUrl' data-size='1200x800'>
+                                         <a href='{scaledImageUrl}' itemprop='contentUrl' data-size='1366x768'>
                                          <img src='{scaledThumbnailUrl}' itemprop='thumbnail' alt='Image description'/>
                                          </a>
                                          </figure>";
@@ -150,16 +174,14 @@ namespace WebViewGalleryApp
         }
 
 
-        private string BuildImagesLines(List<string> cloudinaryIds)
+        private string BuildVlboxImagesLines(List<string> cloudinaryIds)
         {            
-            const string cloudinaryBaseUrl = "https://res.cloudinary.com/kodakbluesky/image/upload/";
-            const string cloudinaryScale = "c_scale,w_120/";
             StringBuilder sb = new StringBuilder();
             foreach (var cloudinaryId in cloudinaryIds)
             {
-                string fullImageUrl = $"{cloudinaryBaseUrl}{cloudinaryId}";
-                string scaledImageUrl = $"{cloudinaryBaseUrl}{cloudinaryScale}{cloudinaryId}";
-                string lineTemplate = $@"<a class='vlightbox1' href='{fullImageUrl}' title=''><img src='{scaledImageUrl}' /></a>";
+                string scaledImageUrl = GetScaledImageUrl(cloudinaryId);
+                string scaledThunmbailImageUrl = GetScaledThunmbailImageUrl(cloudinaryId);
+                string lineTemplate = $@"<a class='vlightbox1' href='{scaledImageUrl}' title=''><img src='{scaledThunmbailImageUrl}' /></a>";
                 sb.Append(lineTemplate);
             }
             return sb.ToString();
