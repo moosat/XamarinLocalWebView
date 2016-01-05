@@ -7,6 +7,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using WebViewGalleryApp.WinPhone.Resources;
+using XLabs.Forms;
 
 namespace WebViewGalleryApp.WinPhone
 {
@@ -54,7 +55,8 @@ namespace WebViewGalleryApp.WinPhone
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
-
+            var app = new XFormsAppWP();
+            app.Init(this);
         }
 
         // Code to execute when the application is launching (eg, from Start)

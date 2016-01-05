@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 
 using Xamarin.Forms;
+using XLabs.Ioc;
+using XLabs.Platform.Device;
+using XLabs.Platform.Services;
 
 namespace WebViewGalleryApp
 {
@@ -11,6 +14,12 @@ namespace WebViewGalleryApp
     {
         public App()
         {
+            var container = new SimpleContainer();
+            container.Register<IDevice>(t => AppleDevice.CurrentDevice);
+            container.Register<IDisplay>(t => t.Resolve<IDevice>().Display);
+            container.Register<INetwork>(t => t.Resolve<IDevice>().Network);
+
+            Resolver.SetResolver(container.GetResolver());
             // The root page of your application
             MainPage = new MainPage();
         }

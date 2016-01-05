@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using WebViewGalleryApp.Controls;
 using Xamarin.Forms;
+using XLabs.Ioc;
+using XLabs.Platform.Device;
 
 namespace WebViewGalleryApp
 {
@@ -60,24 +62,32 @@ namespace WebViewGalleryApp
                 // the BaseUrlWebViewRenderer does this for iOS, until bug is fixed
                 htmlSource.BaseUrl = DependencyService.Get<IBaseUrl>().Get();
             }
-            
-            htmlSource.Html = @"<html>
+
+            string displayMatrix = GetDisplayMatrix();
+            htmlSource.Html = $@"<html>
                                 <head>
                                     <link rel=""stylesheet"" href=""stylesheet.css"">
                                 </head>
                                 <body>
                                     <h1>Welcome to Gallery, Mo</h1>
+                                    <h2>{displayMatrix}</h2>
                                     <p>The CSS and image are loaded from local files!</p>
                                     <img src='WebFiles/Images/kodakit.png'/>
                                     <p><a href=""local.html"">next page</a></p>
                                 </body>
                                 </html>";
             //htmlSource.Html = GetHtmlSource();
-            htmlSource.Html = GetPhotoSwipeHtml();
+            //htmlSource.Html = GetPhotoSwipeHtml();
             Browser.Source = htmlSource;
         }
 
-
+        private string GetDisplayMatrix()
+        {
+            var device = Resolver.Resolve<IDevice>(); //DependencyService.Get<IDevice>();
+            
+            string matrix = $"{device.Display.Height}x{device.Display.Width}";
+            return matrix;
+        }
         private string GetPhotoSwipeHtml()
         {
             const string replaceClause = "####IMAGES_LINES_GOWSHERE###";
