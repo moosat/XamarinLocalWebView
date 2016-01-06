@@ -64,30 +64,34 @@ namespace WebViewGalleryApp
             }
 
             string displayMatrix = GetDisplayMatrix();
-            htmlSource.Html = $@"<html>
+            htmlSource.Html =
+                $@"<html>
                                 <head>
                                     <link rel=""stylesheet"" href=""stylesheet.css"">
                                 </head>
                                 <body>
                                     <h1>Welcome to Gallery, Mo</h1>
-                                    <h2>{displayMatrix}</h2>
+                                    <h2>{
+                    displayMatrix
+                    }</h2>
                                     <p>The CSS and image are loaded from local files!</p>
                                     <img src='WebFiles/Images/kodakit.png'/>
                                     <p><a href=""local.html"">next page</a></p>
                                 </body>
                                 </html>";
-            htmlSource.Html = GetVlboxHtmlSource();
-            //htmlSource.Html = GetPhotoSwipeHtml();
+            //htmlSource.Html = GetVlboxHtmlSource();
+            htmlSource.Html = GetPhotoSwipeHtml();
             Browser.Source = htmlSource;
         }
 
         private string GetDisplayMatrix()
         {
             var device = Resolver.Resolve<IDevice>(); //DependencyService.Get<IDevice>();
-            
+
             string matrix = $"{device.Display.Height}x{device.Display.Width}";
             return matrix;
         }
+
         private string GetPhotoSwipeHtml()
         {
             const string replaceClause = "####IMAGES_LINES_GOWSHERE###";
@@ -115,7 +119,7 @@ namespace WebViewGalleryApp
 
         private string GetHtmlTemplate(string resourceFile)
         {
-            var assembly = typeof(MainPage).GetTypeInfo().Assembly;
+            var assembly = typeof (MainPage).GetTypeInfo().Assembly;
             Stream stream = assembly.GetManifestResourceStream($"WebViewGalleryApp.Resources.{resourceFile}");
             string text = "";
             using (var reader = new System.IO.StreamReader(stream))
@@ -125,13 +129,13 @@ namespace WebViewGalleryApp
             return text;
         }
 
-        private string GetThumnbailTransformation()
+        private string GetThumnbailTransformation(int thumbnailWidthSize)
         {
-            var device = Resolver.Resolve<IDevice>(); 
-            int thumnW = (device.Display.Width/5);
-            int thumnH = (int) (thumnW*0.5622);
+            //var device = Resolver.Resolve<IDevice>();
+            //int thumnW = (device.Display.Width/20);
+            //int thumnH = (int) (thumnW*0.5622);
             //string trans = $"c_thumb,h_{thumnH},w_{thumnW}/";
-            string trans = $"c_thumb,w_{thumnW}/";
+            string trans = $"c_thumb,w_{thumbnailWidthSize}/";
             return trans;
         }
 
@@ -141,12 +145,25 @@ namespace WebViewGalleryApp
             string scaledImageUrl = $"{CloudinaryBaseUrl}{cloudinaryScaleImage}{cloudinaryId}";
             return scaledImageUrl;
         }
-        private string GetScaledThunmbailImageUrl(string cloudinaryId)
+
+        private string GetScaledThunmbailImageUrl(string cloudinaryId,int thumbnailWidthSize)
         {
-            string cloudinaryScaleImage = GetThumnbailTransformation();
+            string cloudinaryScaleImage = GetThumnbailTransformation(thumbnailWidthSize);
             string scaledImageUrl = $"{CloudinaryBaseUrl}{cloudinaryScaleImage}{cloudinaryId}";
             return scaledImageUrl;
         }
+
+
+        private int GetThunmbailWidthSize()
+        {
+            var device = Resolver.Resolve<IDevice>();
+            int thumnW = (int)(device.Display.Width / 7.0);
+          //  int thumnH = (int)(thumnW * 0.5622);
+            return thumnW;
+
+        }
+
+
 
         private string GetFullSizeTransformation()
         {
@@ -156,16 +173,17 @@ namespace WebViewGalleryApp
         }
         const string CloudinaryBaseUrl = "https://res.cloudinary.com/kodakbluesky/image/upload/";
         private string BuildPhotoSwipeImagesLines(List<string> cloudinaryIds)
-        {            
+        {
+            int thumbnailWidthSize = GetThunmbailWidthSize();
             StringBuilder sb = new StringBuilder();
             foreach (var cloudinaryId in cloudinaryIds)
             {
                 string scaledImageUrl = GetScaledImageUrl(cloudinaryId);
-                string scaledThumbnailUrl = GetScaledThunmbailImageUrl(cloudinaryId);
+                string scaledThumbnailUrl = GetScaledThunmbailImageUrl(cloudinaryId, thumbnailWidthSize);
 
-                string lineTemplate = $@"<figure itemprop='associatedMedia' itemscope itemtype='http://schema.org/ImageObject'>
+                string lineTemplate = $@"<figure width={thumbnailWidthSize}px itemprop='associatedMedia' itemscope itemtype='http://schema.org/ImageObject'>
                                          <a href='{scaledImageUrl}' itemprop='contentUrl' data-size='1366x768'>
-                                         <img src='{scaledThumbnailUrl}' itemprop='thumbnail' alt='Image description'/>
+                                         <img src='{scaledThumbnailUrl}' itemprop='thumbnail'/>
                                          </a>
                                          </figure>";
                 sb.Append(lineTemplate);
@@ -175,12 +193,13 @@ namespace WebViewGalleryApp
 
 
         private string BuildVlboxImagesLines(List<string> cloudinaryIds)
-        {            
+        {
+            int thumbnailWidthSize = GetThunmbailWidthSize();
             StringBuilder sb = new StringBuilder();
             foreach (var cloudinaryId in cloudinaryIds)
             {
                 string scaledImageUrl = GetScaledImageUrl(cloudinaryId);
-                string scaledThunmbailImageUrl = GetScaledThunmbailImageUrl(cloudinaryId);
+                string scaledThunmbailImageUrl = GetScaledThunmbailImageUrl(cloudinaryId, thumbnailWidthSize);
                 string lineTemplate = $@"<a class='vlightbox1' href='{scaledImageUrl}' title=''><img src='{scaledThunmbailImageUrl}' /></a>";
                 sb.Append(lineTemplate);
             }
