@@ -185,6 +185,8 @@
         options.bgOpacity = 0.7;
         options.tapToClose = true;
         options.tapToToggleControls = false;
+        options.showAnimationDuration=0;
+       
 
 
         if (disableAnimation) {

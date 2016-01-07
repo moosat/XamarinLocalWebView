@@ -18,7 +18,13 @@ namespace WebViewGalleryApp.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
+			App.ScreenWidth = (int)Resources.DisplayMetrics.WidthPixels; // real pixels
+			App.ScreenHeight = (int)Resources.DisplayMetrics.HeightPixels; // real pixels
+
+
             LoadApplication(new App());
+
         }
     }
 }

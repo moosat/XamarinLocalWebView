@@ -63,7 +63,8 @@ namespace WebViewGalleryApp
                 htmlSource.BaseUrl = DependencyService.Get<IBaseUrl>().Get();
             }
 
-            string displayMatrix = GetDisplayMatrix();
+            
+			string displayMatrix = GetDisplayMatrix();
             htmlSource.Html =
                 $@"<html>
                                 <head>
@@ -80,15 +81,18 @@ namespace WebViewGalleryApp
                                 </body>
                                 </html>";
             //htmlSource.Html = GetVlboxHtmlSource();
+            
             htmlSource.Html = GetPhotoSwipeHtml();
             Browser.Source = htmlSource;
         }
 
         private string GetDisplayMatrix()
         {
-            var device = Resolver.Resolve<IDevice>(); //DependencyService.Get<IDevice>();
+            //var device = Resolver.Resolve<IDevice>(); //DependencyService.Get<IDevice>();
 
-            string matrix = $"{device.Display.Height}x{device.Display.Width}";
+
+
+			string matrix = $"{App.ScreenHeight}x{App.ScreenWidth}";
             return matrix;
         }
 
@@ -135,7 +139,7 @@ namespace WebViewGalleryApp
             //int thumnW = (device.Display.Width/20);
             //int thumnH = (int) (thumnW*0.5622);
             //string trans = $"c_thumb,h_{thumnH},w_{thumnW}/";
-            string trans = $"c_thumb,w_{thumbnailWidthSize}/";
+			string trans = $"c_thumb,w_{thumbnailWidthSize},h_{thumbnailWidthSize}/";
             return trans;
         }
 
@@ -156,8 +160,11 @@ namespace WebViewGalleryApp
 
         private int GetThunmbailWidthSize()
         {
-            var device = Resolver.Resolve<IDevice>();
-            int thumnW = (int)(device.Display.Width / 7.0);
+            //var device = Resolver.Resolve<IDevice>();
+			//get
+
+            //int thumnW = (int)(device.Display.Width / 7.0);
+			int thumnW = (int) (App.ScreenWidth / 7.0);
           //  int thumnH = (int)(thumnW * 0.5622);
             return thumnW;
 
@@ -181,7 +188,7 @@ namespace WebViewGalleryApp
                 string scaledImageUrl = GetScaledImageUrl(cloudinaryId);
                 string scaledThumbnailUrl = GetScaledThunmbailImageUrl(cloudinaryId, thumbnailWidthSize);
 
-                string lineTemplate = $@"<figure width={thumbnailWidthSize}px itemprop='associatedMedia' itemscope itemtype='http://schema.org/ImageObject'>
+                string lineTemplate = $@"<figure itemprop='associatedMedia' itemscope itemtype='http://schema.org/ImageObject'>
                                          <a href='{scaledImageUrl}' itemprop='contentUrl' data-size='1366x768'>
                                          <img src='{scaledThumbnailUrl}' itemprop='thumbnail'/>
                                          </a>

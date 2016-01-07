@@ -12,14 +12,19 @@ namespace WebViewGalleryApp
 {
     public class App : Application
     {
+		public static int ScreenWidth;
+		public static int ScreenHeight;
+
         public App()
         {
-            var container = new SimpleContainer();
-            container.Register<IDevice>(t => AppleDevice.CurrentDevice);
-            container.Register<IDisplay>(t => t.Resolve<IDevice>().Display);
-            container.Register<INetwork>(t => t.Resolve<IDevice>().Network);
+            //var container = new SimpleContainer();
+         
 
-            Resolver.SetResolver(container.GetResolver());
+			//container.Register<IDevice>(t => AppleDevice.CurrentDevice);
+            //container.Register<IDisplay>(t => t.Resolve<IDevice>().Display);
+            //container.Register<INetwork>(t => t.Resolve<IDevice>().Network);
+
+            //Resolver.SetResolver(container.GetResolver());
             // The root page of your application
             MainPage = new MainPage();
         }
