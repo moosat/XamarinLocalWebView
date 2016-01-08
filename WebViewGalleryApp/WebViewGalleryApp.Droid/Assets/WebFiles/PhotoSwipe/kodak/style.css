@@ -9,8 +9,8 @@
 .my-gallery figure {
   display: block;
   float: left;
-  margin: 0 3px 3px 0;
- 
+  margin: 0 0.3% 0.3% 0;
+  width: 33%;
 }
 .my-gallery figcaption {
   display: none;

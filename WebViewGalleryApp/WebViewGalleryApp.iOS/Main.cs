@@ -14,6 +14,10 @@ namespace WebViewGalleryApp.iOS
         {
             // if you want to use a different Application Delegate class from "AppDelegate"
             // you can specify it here.
+
+			App.ScreenWidth = (int)UIScreen.MainScreen.Bounds.Width;
+			App.ScreenHeight = (int)UIScreen.MainScreen.Bounds.Height;
+
             UIApplication.Main(args, null, "AppDelegate");
         }
     }
