@@ -82,9 +82,14 @@ namespace WebViewGalleryApp
                                 </html>";
             
             //htmlSource.Html = GetVlboxHtmlSource();            
-            htmlSource.Html = GetPhotoSwipeHtml();
-            Browser.Source = htmlSource;
+            //htmlSource.Html = GetPhotoSwipeHtml();
+           // Browser.Source = htmlSource;
+//            BindSource = htmlSource.Html;
+
+            (BindingContext as MainPageViewModel).BindSource = htmlSource.Html;
+
         }
+
 
         private string GetDisplayMatrix()
         {
@@ -215,6 +220,12 @@ namespace WebViewGalleryApp
                 sb.Append(lineTemplate);
             }
             return sb.ToString();
+        }
+
+
+        private void BindableObject_OnBindingContextChanged(object sender, EventArgs e)
+        {
+            Browser.Source.BindingContext = BindingContext;
         }
     }
 }

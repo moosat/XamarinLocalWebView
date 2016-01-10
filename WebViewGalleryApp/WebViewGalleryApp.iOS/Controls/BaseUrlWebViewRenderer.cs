@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using Foundation;
+using WebViewGalleryApp;
+using WebViewGalleryApp.iOS.Controls;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
+[assembly: ExportRenderer(typeof(BaseUrlWebView), typeof(BaseUrlWebViewRenderer))]
 namespace WebViewGalleryApp.iOS.Controls
 {
     public class BaseUrlWebViewRenderer : WebViewRenderer

@@ -3,12 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:webViewGalleryApp="clr-namespace:WebViewGalleryApp;assembly=WebViewGalleryApp"
              x:Class="WebViewGalleryApp.MainPage">
+  <ContentPage.BindingContext>
+    <webViewGalleryApp:MainPageViewModel/>
+  </ContentPage.BindingContext>
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
-    <Button Text="Click to load gallery" TextColor="Blue" BackgroundColor="Aqua" Clicked="Button_OnClicked" Grid.Row="0"/>
-    <webViewGalleryApp:BaseUrlWebView x:Name="Browser" Grid.Row="1"/>
+    <Button x:Name="MyButton" Text="{Binding BindSource}" TextColor="Blue" BackgroundColor="Aqua" Clicked="Button_OnClicked" Grid.Row="0"/>
+    <webViewGalleryApp:BaseUrlWebView x:Name="Browser" SourceHtmlString="{Binding BindSource, Mode=TwoWay}" Grid.Row="1">
+      <!--<webViewGalleryApp:BaseUrlWebView.Source>
+        <
+      </webViewGalleryApp:BaseUrlWebView.Source>-->
+    </webViewGalleryApp:BaseUrlWebView>
   </Grid>
 </ContentPage>
