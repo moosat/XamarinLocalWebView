@@ -1,4 +1,7 @@
-﻿.my-gallery {
+﻿body {
+    background-color: black;
+}
+.my-gallery {
   width: 100%;
   float: left;
 }
@@ -10,8 +13,7 @@
   display: block;
   float: left;
   margin: 0 0.3% 0.3% 0;
-  width: 33%;
- 
+  width: 33%; 
 }
 .my-gallery figcaption {
   display: none;

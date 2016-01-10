@@ -80,8 +80,8 @@ namespace WebViewGalleryApp
                                     <p><a href=""local.html"">next page</a></p>
                                 </body>
                                 </html>";
-            //htmlSource.Html = GetVlboxHtmlSource();
             
+            //htmlSource.Html = GetVlboxHtmlSource();            
             htmlSource.Html = GetPhotoSwipeHtml();
             Browser.Source = htmlSource;
         }
@@ -99,8 +99,12 @@ namespace WebViewGalleryApp
         private string GetPhotoSwipeHtml()
         {
             const string replaceClause = "####IMAGES_LINES_GOWSHERE###";
+            const string replceSccStyle = "/*####KODAK_STYLES_CSS_GOES_HERE####*/";
 
             string template = GetHtmlTemplate("SwipeHtmlTemplate.html");
+
+            string kodakPsCss = GetHtmlTemplate("kodak_ps.css");
+            template = template.Replace(replceSccStyle, kodakPsCss);
 
             string lines = BuildPhotoSwipeImagesLines(_coludinaryIds);
 

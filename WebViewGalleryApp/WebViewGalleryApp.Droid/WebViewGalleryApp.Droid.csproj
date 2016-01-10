@@ -145,7 +145,6 @@
     <AndroidAsset Include="Assets\WebFiles\vlb\vlb_files1\loading.gif" />
     <AndroidAsset Include="Assets\WebFiles\vlb\vlb_files1\visuallightbox.css" />
     <AndroidAsset Include="Assets\WebFiles\vlb\vlb_files1\vlightbox1.css" />
-    <AndroidAsset Include="Assets\WebFiles\PhotoSwipe\kodak\style.css" />
     <AndroidAsset Include="Assets\WebFiles\PhotoSwipe\kodak\swipe.js" />
     <AndroidAsset Include="Assets\WebFiles\PhotoSwipe\dist\photoswipe.css" />
     <AndroidAsset Include="Assets\WebFiles\PhotoSwipe\dist\photoswipe.js" />
